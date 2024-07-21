@@ -4,7 +4,10 @@ devrg = {
     name     = "rg-dev-smart"
     location = "West Europe"
   }
-
+rg2 = {
+    name     = "rg-dev-smart2"
+    location = "West Europe"
+  }
 }
 
 dev-storage = {
