@@ -1,0 +1,74 @@
+name: dev miniproject
+
+pool: Default
+trigger: none
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - Environment/Dev
+    exclude:
+    - Environment/Prod  
+stages:
+  - stage: initplanstage
+    displayName: init & plan stage
+    jobs:
+      - job: initplan
+        steps:  
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/Dev'
+            backendServiceArm: 'portal-dev'
+            backendAzureRmResourceGroupName: 'ABC'
+            backendAzureRmStorageAccountName: 'storageabcd123456789'
+            backendAzureRmContainerName: 'state'
+            backendAzureRmKey: 'Dev.terraform.tfstate'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/Dev'
+            environmentServiceNameAzureRM: 'portal-dev'
+  - stage: manualvalidation
+    displayName: manualvalidation
+    dependsOn: initplanstage
+    jobs:
+      - job: validationjob
+        pool: server
+        steps:
+        - task: ManualValidation@1
+          inputs:
+            notifyUsers: 'alam'
+  - stage:
+    dependsOn: manualvalidation
+    displayName: apply
+    jobs: 
+      - job: 
+        steps:
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/Dev'
+            backendServiceArm: 'portal-dev'
+            backendAzureRmResourceGroupName: 'ABC'
+            backendAzureRmStorageAccountName: 'storageabcd123456789'
+            backendAzureRmContainerName: 'state'
+            backendAzureRmKey: 'Dev.terraform.tfstate'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/Dev'
+            environmentServiceNameAzureRM: 'portal-dev'
+        
+
+   
+
+ 
