@@ -1,15 +1,15 @@
 name: dev & prod pr miniproject
 
 pool: Default
-trigger: none
-  # branches:
-  #   include:
-  #   - master
-  # paths:
-  #   include:
-  #   - Environment/Dev
-  #   exclude:
-  #   - Environment/Prod  
+trigger: 
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - Environment/Dev
+    exclude:
+    - Environment/Prod  
 stages:
   - stage: initplanstagedev
     displayName: init & plan stage Dev
