@@ -44,8 +44,7 @@ stages:
         steps:
         - task: ManualValidation@1
           inputs:
-            notifyUsers: 'alambijali'
-            approvers: 'alambijali9@gmail.com'
+            notifyUsers: 'alam'
   - stage:
     dependsOn: manualvalidation
     displayName: apply
