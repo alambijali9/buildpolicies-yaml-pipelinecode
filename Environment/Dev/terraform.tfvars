@@ -8,6 +8,10 @@ rg2 = {
     name     = "rg-dev-smart2"
     location = "West Europe"
   }
+  rg2 = {
+    name     = "rg-dev-smart2"
+    location = "centralindia"
+  }
 }
 
 dev-storage = {
