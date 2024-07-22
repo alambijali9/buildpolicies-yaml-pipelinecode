@@ -11,7 +11,7 @@ dev-storage = {
 
   sa1 = {
 
-    name                     = "devstoragemsworld"
+    name                     = "devstoragemsworldazure"
     resource_group_name      = "rg-dev-smart"
     location                 = "West Europe"
     account_tier             = "Standard"
