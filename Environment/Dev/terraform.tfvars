@@ -18,7 +18,7 @@ dev-storage = {
 
   sa1 = {
 
-    name                     = "devstorageaccountname"
+    name                     = "devstorageaccout"
     resource_group_name      = "rg-dev-smart"
     location                 = "West Europe"
     account_tier             = "Standard"
